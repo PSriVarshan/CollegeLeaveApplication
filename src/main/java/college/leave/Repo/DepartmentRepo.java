@@ -1,8 +1,19 @@
 package college.leave.Repo;
 
 import college.leave.Model.DeptEntity;
+import jakarta.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DepartmentRepo extends JpaRepository<DeptEntity, Integer> {
-
+    @Modifying
+    @Transactional
+    @Query("UPDATE Departments SET deptName=:newName WHERE deptId=:givenId")
+    void updateDeptName(@Param("newName") String newName,
+            @Param("givenId") Integer givenId);
 }
