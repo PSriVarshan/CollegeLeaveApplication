@@ -1,5 +1,8 @@
 package college.leave.Repo;
 
-public class LeaveRepo {
+import college.leave.Model.LeaveApplicationEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LeaveRepo extends JpaRepository<LeaveApplicationEntity, Long> {
 
 }
