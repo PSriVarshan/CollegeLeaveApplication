@@ -14,6 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Data
+@Table(name = "leaves")
 public class LeaveApplicationEntity {
 
     /**
