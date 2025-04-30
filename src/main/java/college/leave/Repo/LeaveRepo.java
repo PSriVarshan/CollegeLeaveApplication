@@ -1,7 +1,6 @@
 package college.leave.Repo;
 
 import college.leave.Model.LeaveApplicationEntity;
-import college.leave.Model.StudentsEntity;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
