@@ -14,6 +14,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LeaveRepo extends JpaRepository<LeaveApplicationEntity, Long> {
+    /**
+     * TO UPDATE THE APPROVAL STATUSES IN LEAVE APPLICATION AND STUDENTS ENTITY
+     */
+
     @Transactional
     @Modifying
     @Query("UPDATE leaves l SET l.ApprovalStatus=l.ApprovalStatus.APPROVED WHERE l.leaveId=:lId and l.ApprovalStatus.PENDING")
@@ -22,13 +26,16 @@ public interface LeaveRepo extends JpaRepository<LeaveApplicationEntity, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE leaves l SET l.ApprovalStatus=l.ApprovalStatus.APPROVED WHERE studentId=:sId and l.ApprovalStatus.PENDING")
-    void acceptLeaveByStudentId(@Param("sId") StudentsEntity sId);
+    void acceptLeaveByStudentId(@Param("sId") Long sId);
 
     @Transactional
     @Modifying
     @Query("UPDATE leaves l SET l.ApprovalStatus=l.ApprovalStatus.REJECTED WHERE studentId=:sId and l.ApprovalStatus.PENDING")
-    void rejectLeaveByStudentId(@Param("sId") StudentsEntity sId);
+    void rejectLeaveByStudentId(@Param("sId") Long sId);
 
     @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.ApprovalStatus = l.ApprovalStatus.APPROVED and l.mentorId=:givenId")
     List<LeaveApplicationEntity> allApprovedLeavesByMentor(@Param("givenId") String givenId);
+
+    @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.ApprovalStatus = l.ApprovalStatus.REJECTED and l.mentorId=:givenId")
+    List<LeaveApplicationEntity> allRejectedLeavesByMentor(@Param("givenId") String givenId);
 }
