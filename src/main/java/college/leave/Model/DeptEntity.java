@@ -27,5 +27,4 @@ public class DeptEntity {
      */
     private String deptName;
     private Integer HODId;
-
 }
