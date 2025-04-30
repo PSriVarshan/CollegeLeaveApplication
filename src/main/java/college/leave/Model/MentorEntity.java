@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 /**
@@ -35,6 +37,9 @@ public class MentorEntity {
     @Column(unique = true)
     private String email;
 
+    @OneToMany
+    @JoinColumn(name = "deptId")
+    private DeptEntity deptId;
     /**
      * Password for the mentor's account.
      */
