@@ -10,6 +10,8 @@ import lombok.Data;
  */
 @Entity
 @Data
+
+@Table(name = "Departments")
 public class DeptEntity {
 
     /**
