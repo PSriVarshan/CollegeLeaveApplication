@@ -26,5 +26,6 @@ public class DeptEntity {
      * Name of the department.
      */
     private String deptName;
+    private Integer HODId;
 
 }

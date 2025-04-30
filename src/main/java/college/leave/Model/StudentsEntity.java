@@ -42,4 +42,8 @@ public class StudentsEntity {
      * Password for the student's account.
      */
     private String password;
+
+    @OneToMany
+    @JoinColumn(name="deptId")
+    private DeptEntity deptId;
 }
