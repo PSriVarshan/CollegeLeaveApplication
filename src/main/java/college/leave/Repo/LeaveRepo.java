@@ -24,6 +24,11 @@ public interface LeaveRepo extends JpaRepository<LeaveApplicationEntity, Long> {
 
     @Transactional
     @Modifying
+    @Query("UPDATE leaves l SET l.ApprovalStatus=l.ApprovalStatus.APPROVED WHERE l.leaveId=:lId and l.ApprovalStatus.REJECTED")
+    void rejectLeave(@Param("lId") Long lId);
+
+    @Transactional
+    @Modifying
     @Query("UPDATE leaves l SET l.ApprovalStatus=l.ApprovalStatus.APPROVED WHERE studentId=:sId and l.ApprovalStatus.PENDING")
     void acceptLeaveByStudentId(@Param("sId") Long sId);
 
@@ -37,4 +42,8 @@ public interface LeaveRepo extends JpaRepository<LeaveApplicationEntity, Long> {
 
     @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.ApprovalStatus = l.ApprovalStatus.REJECTED and l.mentorId=:givenId")
     List<LeaveApplicationEntity> allRejectedLeavesByMentor(@Param("givenId") String givenId);
+
+
+    @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.ApprovalStatus = l.ApprovalStatus.PENDING and l.mentorId=:givenId")
+    List<LeaveApplicationEntity> allPendingLeavesByMentor(@Param("givenId") String givenId);
 }
