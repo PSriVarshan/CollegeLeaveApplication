@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name="Students")
+@Table(name = "Students")
 public class StudentsEntity {
 
     /**
@@ -44,6 +44,10 @@ public class StudentsEntity {
     private String password;
 
     @OneToMany
-    @JoinColumn(name="deptId")
+    @JoinColumn(name = "deptId")
     private DeptEntity deptId;
+
+    @OneToMany
+    @JoinColumn(name = "mentorId")
+    private MentorEntity mentorId;
 }

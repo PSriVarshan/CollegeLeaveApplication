@@ -5,6 +5,7 @@ import college.leave.Model.Enums.LeaveType;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -49,9 +50,9 @@ public class LeaveApplicationEntity {
     private String reason;
 
     /**
-     * The date when the leave application was submitted.
+     * The date and time when the leave application was submitted.
      */
-    private Date appliedDate;
+    private LocalDateTime appliedDate;
 
     /**
      * The current approval status of the leave application.

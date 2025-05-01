@@ -1,5 +1,6 @@
 package college.leave.Model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import college.leave.Model.Enums.ApprovalStatus;
@@ -23,6 +24,8 @@ public class MentorLeaveEntity {
     @OneToMany
     @JoinColumn(name = "mentorId")
     private MentorEntity mentorId;
+
+    private LocalDateTime appliedDateTime;
 
     /**
      * The start date of the leave.
