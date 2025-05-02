@@ -30,7 +30,7 @@ public class LeaveApplicationEntity {
      * The student who applied for the leave.
      * Mapped to the StudentsEntity table.
      */
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "studentId")
     private StudentsEntity studentId;
 
@@ -64,7 +64,7 @@ public class LeaveApplicationEntity {
      * The mentor responsible for reviewing the leave application.
      * Mapped to the MentorEntity table.
      */
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "mentorID")
     private MentorEntity mentor;
 

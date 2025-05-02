@@ -43,11 +43,11 @@ public class StudentsEntity {
      */
     private String password;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "deptId")
     private DeptEntity deptId;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "mentorId")
     private MentorEntity mentorId;
 }

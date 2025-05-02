@@ -13,7 +13,7 @@ public interface StudentsRepo extends JpaRepository<StudentsEntity, Long> {
     @Modifying
     @Transactional
     @Query("UPDATE students SET studentName=:newName, email=:newEmail, phoneNo=:newContact WHERE studentId=:sid")
-    void updateStudentDetailsInLeave(
+    public void updateStudentDetailsInLeave(
             @Param("newName") String newName,
             @Param("newEmail") String newEmail,
             @Param("newContact") Long newContact,

@@ -17,7 +17,7 @@ public class StudentsService {
         return studentsRepo.save(student);
     }
 
-    public List<StudentsEntity> displayStudents(StudentsEntity student) {
+    public List<StudentsEntity> displayStudents() {
         return studentsRepo.findAll();
     }
 

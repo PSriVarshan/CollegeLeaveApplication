@@ -13,7 +13,7 @@ public interface MentorRepo extends JpaRepository<MentorEntity, String> {
     @Transactional
     @Modifying
     @Query("UPDATE Mentors SET facultyName=:newName, email=:newEmail, phoneNumber=:newContact WHERE mentorId=:mId")
-    void updateMentorDetails(
+    public void updateMentorDetails(
             @Param("mid") String mid,
             @Param("newName") String newName,
             @Param("newEmail") String newEmail,

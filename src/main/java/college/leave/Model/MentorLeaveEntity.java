@@ -4,13 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import college.leave.Model.Enums.ApprovalStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -21,7 +15,7 @@ public class MentorLeaveEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long mentorLeaveId;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "mentorId")
     private MentorEntity mentorId;
 

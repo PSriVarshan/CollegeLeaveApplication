@@ -40,7 +40,7 @@ public class MentorEntity {
     @Column(unique = true)
     private String email;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "deptId")
     private DeptEntity deptId;
     /**
