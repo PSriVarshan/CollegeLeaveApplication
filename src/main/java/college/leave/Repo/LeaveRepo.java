@@ -1,6 +1,7 @@
 package college.leave.Repo;
 
 import college.leave.Model.LeaveApplicationEntity;
+import college.leave.Model.Enums.ApprovalStatus;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
@@ -13,37 +14,84 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LeaveRepo extends JpaRepository<LeaveApplicationEntity, Long> {
+
     /**
-     * TO UPDATE THE APPROVAL STATUSES IN LEAVE APPLICATION AND STUDENTS ENTITY
+     * Updates the approval status of a leave application to APPROVED.
+     *
+     * @param lId The ID of the leave application to be updated.
      */
-
     @Transactional
     @Modifying
-    @Query("UPDATE leaves l SET l.ApprovalStatus=l.ApprovalStatus.APPROVED WHERE l.leaveId=:lId and l.ApprovalStatus.PENDING")
-    void acceptLeave(@Param("lId") Long lId);
+    @Query("UPDATE LeaveApplicationEntity l SET l.status = :status WHERE l.leaveId = :lId AND l.status = :currentStatus")
+    void acceptLeave(@Param("lId") Long lId,
+            @Param("status") ApprovalStatus status,
+            @Param("currentStatus") ApprovalStatus currentStatus);
 
+    /**
+     * Updates the approval status of a leave application to REJECTED.
+     *
+     * @param lId The ID of the leave application to be updated.
+     */
     @Transactional
     @Modifying
-    @Query("UPDATE leaves l SET l.ApprovalStatus=l.ApprovalStatus.APPROVED WHERE l.leaveId=:lId and l.ApprovalStatus.REJECTED")
-    void rejectLeave(@Param("lId") Long lId);
+    @Query("UPDATE LeaveApplicationEntity l SET l.status = :status WHERE l.leaveId = :lId AND l.status = :currentStatus")
+    void rejectLeave(@Param("lId") Long lId,
+            @Param("status") ApprovalStatus status,
+            @Param("currentStatus") ApprovalStatus currentStatus);
 
+    /**
+     * Updates the approval status of all leave applications for a specific student
+     * to APPROVED.
+     *
+     * @param sId The ID of the student.
+     */
     @Transactional
     @Modifying
-    @Query("UPDATE leaves l SET l.ApprovalStatus=l.ApprovalStatus.APPROVED WHERE studentId=:sId and l.ApprovalStatus.PENDING")
-    void acceptLeaveByStudentId(@Param("sId") Long sId);
+    @Query("UPDATE LeaveApplicationEntity l SET l.status = :status WHERE l.studentId.studentId = :sId AND l.status = :currentStatus")
+    void acceptLeaveByStudentId(@Param("sId") Long sId,
+            @Param("status") ApprovalStatus status,
+            @Param("currentStatus") ApprovalStatus currentStatus);
 
+    /**
+     * Updates the approval status of all leave applications for a specific student
+     * to REJECTED.
+     *
+     * @param sId The ID of the student.
+     */
     @Transactional
     @Modifying
-    @Query("UPDATE leaves l SET l.ApprovalStatus=l.ApprovalStatus.REJECTED WHERE studentId=:sId and l.ApprovalStatus.PENDING")
-    void rejectLeaveByStudentId(@Param("sId") Long sId);
+    @Query("UPDATE LeaveApplicationEntity l SET l.status = :status WHERE l.studentId.studentId = :sId AND l.status = :currentStatus")
+    void rejectLeaveByStudentId(@Param("sId") Long sId,
+            @Param("status") ApprovalStatus status,
+            @Param("currentStatus") ApprovalStatus currentStatus);
 
-    @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.ApprovalStatus = l.ApprovalStatus.APPROVED and l.mentorId=:givenId")
-    List<LeaveApplicationEntity> allApprovedLeavesByMentor(@Param("givenId") String givenId);
+    /**
+     * Retrieves all approved leave applications for a specific mentor.
+     *
+     * @param givenId The ID of the mentor.
+     * @return A list of approved leave applications.
+     */
+    @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.status = :status AND l.mentor.mentorId = :givenId")
+    List<LeaveApplicationEntity> allApprovedLeavesByMentor(@Param("status") ApprovalStatus status,
+            @Param("givenId") String givenId);
 
-    @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.ApprovalStatus = l.ApprovalStatus.REJECTED and l.mentorId=:givenId")
-    List<LeaveApplicationEntity> allRejectedLeavesByMentor(@Param("givenId") String givenId);
+    /**
+     * Retrieves all rejected leave applications for a specific mentor.
+     *
+     * @param givenId The ID of the mentor.
+     * @return A list of rejected leave applications.
+     */
+    @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.status = :status AND l.mentor.mentorId = :givenId")
+    List<LeaveApplicationEntity> allRejectedLeavesByMentor(@Param("status") ApprovalStatus status,
+            @Param("givenId") String givenId);
 
-
-    @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.ApprovalStatus = l.ApprovalStatus.PENDING and l.mentorId=:givenId")
-    List<LeaveApplicationEntity> allPendingLeavesByMentor(@Param("givenId") String givenId);
+    /**
+     * Retrieves all pending leave applications for a specific mentor.
+     *
+     * @param givenId The ID of the mentor.
+     * @return A list of pending leave applications.
+     */
+    @Query("SELECT l FROM LeaveApplicationEntity l WHERE l.status = :status AND l.mentor.mentorId = :givenId")
+    List<LeaveApplicationEntity> allPendingLeavesByMentor(@Param("status") ApprovalStatus status,
+            @Param("givenId") String givenId);
 }

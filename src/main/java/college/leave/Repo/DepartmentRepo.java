@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface DepartmentRepo extends JpaRepository<DeptEntity, Integer> {
     @Modifying
     @Transactional
-    @Query("UPDATE Departments SET deptName=:newName WHERE deptId=:givenId")
+    @Query("UPDATE DeptEntity SET deptName=:newName WHERE deptId=:givenId")
     void updateDeptName(@Param("newName") String newName,
             @Param("givenId") Integer givenId);
 }

@@ -9,14 +9,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MentorRepo extends JpaRepository<MentorEntity, String> {
+public interface MentorRepo extends JpaRepository<MentorEntity, Long> {
     @Transactional
     @Modifying
-    @Query("UPDATE Mentors SET facultyName=:newName, email=:newEmail, phoneNumber=:newContact WHERE mentorId=:mId")
+    @Query("UPDATE MentorEntity SET facultyName=:newName, email=:newEmail, phoneNumber=:newContact WHERE mentorId=:mId")
     public void updateMentorDetails(
-            @Param("mid") String mid,
+            @Param("mid") Long mid,
             @Param("newName") String newName,
             @Param("newEmail") String newEmail,
-            @Param("newContact") Long newContact
-    );
+            @Param("newContact") Long newContact);
 }

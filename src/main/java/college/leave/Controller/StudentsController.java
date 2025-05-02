@@ -16,27 +16,27 @@ public class StudentsController {
     private StudentsService studentsService;
 
     @PostMapping("/add")
-    public StudentsEntity addStudentDetails(StudentsEntity student){
+    public StudentsEntity addStudentDetails(@RequestBody StudentsEntity student) {
         return studentsService.addStudent(student);
     }
 
     @GetMapping("/display/{id}")
-    public Optional<StudentsEntity> displayStudents(@PathVariable("id") Long StudentId){
+    public Optional<StudentsEntity> displayStudents(@PathVariable("id") Long StudentId) {
         return studentsService.getStudentById(StudentId);
     }
 
     @GetMapping("/displayAll")
-    public List<StudentsEntity> displayAllStudents(){
+    public List<StudentsEntity> displayAllStudents() {
         return studentsService.displayStudents();
     }
 
     @PutMapping("/update/{id}")
-    public void updateStudents(@RequestBody Long StudentId,String stName,String email, Long contact){
-        studentsService.updateStudent(StudentId, stName,email,contact);
+    public void updateStudents(@RequestBody Long StudentId, String stName, String email, Long contact) {
+        studentsService.updateStudent(StudentId, stName, email, contact);
     }
 
     @DeleteMapping("/del/{id}")
-    public String deleteStudent(@PathVariable Long StudentId){
+    public String deleteStudent(@PathVariable Long StudentId) {
         studentsService.deleteStudent(StudentId);
         return "Student Data deleted Successfully !!";
     }

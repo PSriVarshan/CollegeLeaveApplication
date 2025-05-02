@@ -7,7 +7,7 @@ import college.leave.Repo.LeaveRepo;
 
 @Service
 public class LeaveService {
-    @Autowired
-    private LeaveRepo studentLeave;
+    // @Autowired
+    // private LeaveRepo studentLeave;
 
 }

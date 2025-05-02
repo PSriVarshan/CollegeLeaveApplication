@@ -14,7 +14,7 @@ public class MentorService {
         return mentorRepo.save(mentor);
     }
 
-    public MentorEntity getMentorDetails(String mentorId) {
+    public MentorEntity getMentorDetails(Long mentorId) {
         return mentorRepo.findById(mentorId).orElse(null);
     }
 
@@ -23,7 +23,7 @@ public class MentorService {
                 mentor.getPhoneNumber());
     }
 
-    public void deleteMentor(String mentorId) {
+    public void deleteMentor(Long mentorId) {
         mentorRepo.deleteById(mentorId);
     }
 }

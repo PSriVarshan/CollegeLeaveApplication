@@ -12,12 +12,11 @@ import org.springframework.stereotype.Repository;
 public interface StudentsRepo extends JpaRepository<StudentsEntity, Long> {
     @Modifying
     @Transactional
-    @Query("UPDATE students SET studentName=:newName, email=:newEmail, phoneNo=:newContact WHERE studentId=:sid")
+    @Query("UPDATE StudentsEntity SET studentName=:newName, email=:newEmail, phoneNo=:newContact WHERE studentId=:sid")
     public void updateStudentDetailsInLeave(
             @Param("newName") String newName,
             @Param("newEmail") String newEmail,
             @Param("newContact") Long newContact,
-            @Param("sid") Long sid
-    );
+            @Param("sid") Long sid);
 
 }
