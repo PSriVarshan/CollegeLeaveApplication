@@ -24,20 +24,8 @@ public class DeptController {
         return deptService.listAllDepartments();
     }
 
-    @GetMapping("/getDept/{id}")
+    @GetMapping("/getDept/{deptId}")
     public DeptEntity getDeptById(@PathVariable Integer deptId) {
         return deptService.findDeptById(deptId);
-    }
-
-    @PutMapping("/updateDept/{id}")
-    public String updateDept(@RequestBody String deptName, Integer deptId){
-        deptService.updateDeptName(deptName, deptId);
-        return "Updated Department Successfully";
-    }
-
-    @DeleteMapping("/delDept/{id}")
-    public String deleteDept(@PathVariable Integer deptId){
-        deptService.deleteDepartmentById(deptId);
-        return "Deleted Department Successfully";
     }
 }
