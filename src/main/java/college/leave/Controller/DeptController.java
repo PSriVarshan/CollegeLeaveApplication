@@ -28,4 +28,16 @@ public class DeptController {
     public DeptEntity getDeptById(@PathVariable Integer deptId) {
         return deptService.findDeptById(deptId);
     }
+
+    @PutMapping("/updateDept/{deptId}")
+    public String updateDept(@RequestBody String deptName, @PathVariable Integer deptId) {
+        deptService.updateDeptName(deptName, deptId);
+        return "Updated Department Successfully";
+    }
+
+    @DeleteMapping("/delDept/{deptId}")
+    public String deleteDept(@PathVariable Integer deptId) {
+        deptService.deleteDepartmentById(deptId);
+        return "Deleted Department Successfully";
+    }
 }
