@@ -15,17 +15,17 @@ public class DeptController {
     private DepartmentService deptService;
 
     @PostMapping("/addDept")
-    public DeptEntity addDept(@RequestBody DeptEntity dept){
+    public DeptEntity addDept(@RequestBody DeptEntity dept) {
         return deptService.addDepartment(dept);
     }
 
     @GetMapping("/getAllDept")
-    public List<DeptEntity> listDepartments(){
+    public List<DeptEntity> listDepartments() {
         return deptService.listAllDepartments();
     }
 
     @GetMapping("/getDept/{id}")
-    public DeptEntity getDeptById(@PathVariable Integer deptId){
+    public DeptEntity getDeptById(@PathVariable Integer deptId) {
         return deptService.findDeptById(deptId);
     }
 }
