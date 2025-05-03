@@ -14,7 +14,7 @@ public interface MentorRepo extends JpaRepository<MentorEntity, Long> {
     @Modifying
     @Query("UPDATE MentorEntity SET facultyName=:newName, email=:newEmail, phoneNumber=:newContact WHERE mentorId=:mId")
     public void updateMentorDetails(
-            @Param("mid") Long mid,
+            @Param("mId") Long mId,
             @Param("newName") String newName,
             @Param("newEmail") String newEmail,
             @Param("newContact") Long newContact);

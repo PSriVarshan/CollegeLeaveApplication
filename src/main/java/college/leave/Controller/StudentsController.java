@@ -3,7 +3,6 @@ package college.leave.Controller;
 import college.leave.Model.StudentsEntity;
 import college.leave.Service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

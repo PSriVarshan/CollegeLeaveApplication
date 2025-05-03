@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RequestMapping("/mentors/api")
@@ -31,7 +30,6 @@ public class MentorController {
 
     @PostMapping("/add")
     public MentorEntity addMentorEntity(@RequestBody MentorEntity entity) {
-
         return mentorService.addMentor(entity);
     }
 
@@ -40,10 +38,9 @@ public class MentorController {
         return mentorService.getMentorDetails(id);
     }
 
-    @PutMapping("/updateDetails/{id}")
-    public String putMethodName(@PathVariable Long id, @RequestBody MentorEntity entity) {
+    @PutMapping("/updateDetails")
+    public String putMethodName(@RequestBody MentorEntity entity) {
         mentorService.updateMentor(entity);
         return "Success";
     }
-
 }
