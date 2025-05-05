@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import college.leave.Model.LeaveApplicationEntity;
 import college.leave.Model.StudentsEntity;
+import college.leave.Model.Enums.ApprovalStatus;
 import college.leave.Repo.LeaveRepo;
 import college.leave.Repo.StudentsRepo;
 
@@ -28,4 +29,13 @@ public class LeaveService {
             throw new Exception("Unable to search student with Id" + studentId);
         return leave.findByStudentId(obj);
     }
+
+    public void acceptLeave(Long id) {
+        leave.acceptLeaveByLeaveId(id, ApprovalStatus.APPROVED, ApprovalStatus.PENDING);
+    }
+
+    public void rejectLeave(long id) {
+        leave.rejectLeave(id, ApprovalStatus.REJECTED, ApprovalStatus.PENDING);
+    }
+
 }

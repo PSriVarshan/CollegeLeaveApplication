@@ -26,7 +26,7 @@ public interface LeaveRepo extends JpaRepository<LeaveApplicationEntity, Long> {
         @Transactional
         @Modifying
         @Query("UPDATE LeaveApplicationEntity l SET l.status = :status WHERE l.leaveId = :lId AND l.status = :currentStatus")
-        void acceptLeave(@Param("lId") Long lId,
+        void acceptLeaveByLeaveId(@Param("lId") Long lId,
                         @Param("status") ApprovalStatus status,
                         @Param("currentStatus") ApprovalStatus currentStatus);
 
